@@ -5,23 +5,35 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import pickle
 import pandas as pd
 
+import os
 
-api_key_id = st.secrets["api"]["SPOTIFY_CLIENT_ID"]
-api_key_secret = st.secrets["api"]["SPOTIFY_CLIENT_SECRET"]
+# Use os.path.join() to construct the path
+current_directory = os.path.dirname(__file__)  # Directory of the script
 
-# import sys
-# sys.path.append('..')
-# import config
-
-
+file_path_model = os.path.join(current_directory, 'Gnod_Kmeans_4.pkl')
 # Load the KMeans model
-with open('Gnod_Kmeans_4.pkl', 'rb') as f:
+with open(file_path_model, 'rb') as f:
     kmeans = pickle.load(f)
 
 
 
+# Use os.path.join() to construct the path
+file_path = os.path.join(current_directory, 'big_playlist_df.csv')  # Ensure quotes are standard
+
+# Load your playlist dataframe
+playlist_df = pd.read_csv(file_path)
+
+
+
+# Load the spotify credentials
+api_key_id = st.secrets["api"]["SPOTIFY_CLIENT_ID"]
+api_key_secret = st.secrets["api"]["SPOTIFY_CLIENT_SECRET"]
+
+
+
 # Load your playlist dataframe (where the clusters and songs are stored)
-playlist_df = pd.read_csv("big_playlist_df.csv")  
+playlist_df = pd.read_csv("big_playlist_df.csv") 
+
 
 
 # Set up Spotipy with your credentials
