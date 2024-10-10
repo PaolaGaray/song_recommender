@@ -15,13 +15,13 @@ api_key_secret = st.secrets["api"]["SPOTIFY_CLIENT_SECRET"]
 
 
 # Load the KMeans model
-with open('../models/Gnod_Kmeans_4.pkl', 'rb') as f:
+with open('Gnod_Kmeans_4.pkl', 'rb') as f:
     kmeans = pickle.load(f)
 
 
 
 # Load your playlist dataframe (where the clusters and songs are stored)
-playlist_df = pd.read_csv("../data/clean/big_playlist_df.csv")  
+playlist_df = pd.read_csv("big_playlist_df.csv")  
 
 
 # Set up Spotipy with your credentials
