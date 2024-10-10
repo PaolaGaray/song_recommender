@@ -10,5 +10,4 @@ dependencies:
   - jupyterlab  # Add JupyterLab
   - ipykernel   # Add ipykernel to manage kernels
   - pip  # Include pip so that we can use it to install Spotipy
-  - pip:
-      - spotipy
+  - spotipy
