@@ -21,7 +21,7 @@ with open('../models/Gnod_Kmeans_4.pkl', 'rb') as f:
 
 
 # Load your playlist dataframe (where the clusters and songs are stored)
-playlist_df = pd.read_csv("../data/clean/big_playlist_df.csv")  # Adjust the path
+playlist_df = pd.read_csv("../data/clean/big_playlist_df.csv")  
 
 
 # Set up Spotipy with your credentials
