@@ -1,5 +1,5 @@
 python
-streamlit=0.88.0
+streamlit==0.88.0
 scikit-learn
 pandas
 jupyterlab
