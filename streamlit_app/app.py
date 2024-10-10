@@ -5,9 +5,13 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import pickle
 import pandas as pd
 
-import sys
-sys.path.append('..')
-import config
+
+api_key_id = st.secrets["api"]["SPOTIFY_CLIENT_ID"]
+api_key_secret = st.secrets["api"]["SPOTIFY_CLIENT_SECRET"]
+
+# import sys
+# sys.path.append('..')
+# import config
 
 
 # Load the KMeans model
@@ -21,8 +25,8 @@ playlist_df = pd.read_csv("../data/clean/big_playlist_df.csv")  # Adjust the pat
 
 
 # Set up Spotipy with your credentials
-sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=config.SPOTIFY_CLIENT_ID,
-                                                          client_secret=config.SPOTIFY_CLIENT_SECRET))
+sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=api_key_id,
+                                                          client_secret=api_key_secret))
 
 
 def fetch_song_data(song_input, artist_input):
@@ -73,10 +77,8 @@ if st.button('Recommend a Song'):
         if song_id:
             # Get song features and predict the cluster
             X = get_song_features(song_id)
-            cluster_num = clustify(X)
-            
-            # Get recommendation
-            recommended_song = recommender(cluster_num)
+            cluster_num = clustify(X)           
+            recommended_song = recommender(cluster_num)  # Get recommendation
             
             # Display only the relevant recommendation
             st.success(f"Based on '{song_input}' by {artist_input}, we recommend: '{recommended_song}'!")
