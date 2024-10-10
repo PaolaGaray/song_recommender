@@ -25,20 +25,11 @@ sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=config.SPOT
                                                           client_secret=config.SPOTIFY_CLIENT_SECRET))
 
 
-
-# Define functions for fetching song data and making predictions
-
 def fetch_song_data(song_input, artist_input):
-    # Add artist in search to make it more specific
-    query = f"track:{song_input} artist:{artist_input}"
-    result = sp.search(q=query, limit=1, market="DE")
-    
-    # Ensure we have results and grab the song ID
-    if result['tracks']['items']:
-        song_id = result['tracks']['items'][0]['id']
-        return song_id
-    else:
-        return None
+    # Add artist in search
+    result = sp.search(q=song_input, limit=1, market="DE")
+    song_id = result['tracks']['items'][0]['id']
+    return song_id
 
 
 def get_song_features(song_id):
@@ -51,17 +42,18 @@ def get_song_features(song_id):
     feats_df = pd.DataFrame(song_feats)
     return feats_df[feature_list]
 
+
 def clustify(X):
     cluster = kmeans.predict(X)
     cluster = cluster[0]  # Take the first prediction from array
     return cluster
+
 
 def recommender(cluster_num):
     cluster_songs = playlist_df.loc[playlist_df['cluster'] == cluster_num]  # Find songs in the same cluster
     random_sample = cluster_songs.sample(n=1, random_state=42)  # Select one random song
     song_name = random_sample['names'].values[0]  # Get the song name
     return song_name
-
 
 
 # Streamlit app code starts here
