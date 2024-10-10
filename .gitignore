@@ -1,0 +1,20 @@
+# Ignore config.py to avoid exposing credentials
+config.py
+
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore virtual environment directories
+venv/
+.env/
+song_env/
+
+# Ignore system files (macOS and Windows)
+.DS_Store
+Thumbs.db
+
+
