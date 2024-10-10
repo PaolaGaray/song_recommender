@@ -4,7 +4,7 @@ channels:
   - conda-forge
 dependencies:
   - python=3.12
-  - streamlit
+  - streamlit=0.88.0
   - scikit-learn
   - pandas
   - jupyterlab  # Add JupyterLab
