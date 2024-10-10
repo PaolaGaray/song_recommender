@@ -1,8 +1,7 @@
-python=3.12
+python
 streamlit=0.88.0
-scikit-learn=1.5.1
-pandas=2.2.2
-jupyterlab=4.2.5  
+scikit-learn
+pandas
+jupyterlab
 ipykernel  
-pip 
 spotipy
