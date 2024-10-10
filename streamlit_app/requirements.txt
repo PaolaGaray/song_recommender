@@ -4,3 +4,4 @@ pandas
 jupyterlab
 ipykernel  
 spotipy
+os
