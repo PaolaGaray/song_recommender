@@ -5,6 +5,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import pickle
 import pandas as pd
 
+
 import os
 
 # Use os.path.join() to construct the path
@@ -64,7 +65,23 @@ def recommender(cluster_num):
     cluster_songs = playlist_df.loc[playlist_df['cluster'] == cluster_num]  # Find songs in the same cluster
     random_sample = cluster_songs.sample(n=1, random_state=42)  # Select one random song
     song_name = random_sample['names'].values[0]  # Get the song name
+    
     return song_name
+
+
+def get_preview(recommended_song):
+
+    # Filter the DataFrame for the row where the 'names' column matches the recommended_song
+    song_list = playlist_df.loc[playlist_df['names'] == recommended_song]
+    # Access the 'id' column of the filtered row
+    r_song_id = song_list['id'].values[0] if not song_list.empty else None
+    
+    spotify_url = f"https://open.spotify.com/embed/track/{r_song_id}"
+    iframe_html = f"""
+    <iframe src="{spotify_url}" width="320" height="80" frameborder="0" 
+    allowtransparency="true" allow="encrypted-media"></iframe>
+    """
+    return iframe_html
 
 
 # Streamlit app code starts here
@@ -89,6 +106,10 @@ if st.button('Recommend a Song'):
             
             # Display only the relevant recommendation
             st.success(f"Based on '{song_input}' by {artist_input}, we recommend: '{recommended_song}'!")
+            
+            # Embed the preview widget
+            st.components.v1.html(get_preview(recommended_song), height=100)
+            
         else:
             st.error("Could not find the song. Please try again.")
     else:
