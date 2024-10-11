@@ -63,7 +63,8 @@ def clustify(X):
 
 def recommender(cluster_num):
     cluster_songs = playlist_df.loc[playlist_df['cluster'] == cluster_num]  # Find songs in the same cluster
-    random_sample = cluster_songs.sample(n=1, random_state=42)  # Select one random song
+    # random_sample = cluster_songs.sample(n=1, random_state=42)  # Select one random song
+    random_sample = cluster_songs.sample(n=1)  # Select one random song
     song_name = random_sample['names'].values[0]  # Get the song name
     
     return song_name
